@@ -22,5 +22,9 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+       <activity
+            android:name=".CustomScreenActivity"
+            android:exported="true"
+            android:label="Custom Screen" />
     </application>
 </manifest>
