@@ -11,12 +11,19 @@ ScrollView
 
 import NativeLocalStorage from './specs/NativeLocalStorage';
 import { WebView } from 'react-native-webview';
+import processUrl from './utils/processUrl';
 
 const EMPTY = '<empty>';
 
 function App(): React.JSX.Element {
   const [value, setValue] = React.useState<string | null>(null);
+  const [accessToken, setAccessToken] = React.useState('');
   const handleNavigationChange = (navState) => {
+    if(navState?.url.includes('access_token=')){
+      let extractedAccessToken = processUrl(navState.url)
+      setAccessToken(extractedAccessToken);
+    }
+    
     console.log('Navigated to URL:', navState.url);
   };
   const [editingValue, setEditingValue] = React.useState<
@@ -73,7 +80,11 @@ function App(): React.JSX.Element {
           onNavigationStateChange={handleNavigationChange} // Log URL changes
         />
       </View>
+      <Text>
+        {accessToken}
+      </Text>
       <Button title="open custom view with message " onPress={()=>{NativeLocalStorage?.openCustomScreen("naman")}} />
+    
 
     </ScrollView>
 
