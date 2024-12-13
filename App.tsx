@@ -5,15 +5,20 @@ import {
   Text,
   TextInput,
   Button,
+  View,
+ScrollView
 } from 'react-native';
 
 import NativeLocalStorage from './specs/NativeLocalStorage';
+import { WebView } from 'react-native-webview';
 
 const EMPTY = '<empty>';
 
 function App(): React.JSX.Element {
   const [value, setValue] = React.useState<string | null>(null);
-
+  const handleNavigationChange = (navState) => {
+    console.log('Navigated to URL:', navState.url);
+  };
   const [editingValue, setEditingValue] = React.useState<
     string | null
   >(null);
@@ -39,21 +44,39 @@ function App(): React.JSX.Element {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Text style={styles.text}>
-        Current stored value is: {value ?? 'No Value'}
-      </Text>
-      <TextInput
-        placeholder="Enter the text you want to store"
-        style={styles.textInput}
-        onChangeText={setEditingValue}
-      />
-      <Button title="Save" onPress={saveValue} />
-      <Button title="Delete" onPress={deleteValue} />
-      <Button title="Clear" onPress={clearAll} />
+     <ScrollView      contentInsetAdjustmentBehavior="automatic"
+      style={styles.scrollView}
+    >
+    
+      <View style={styles.container}>
+        <WebView
+          style={styles.webView}
+          textZoom={100}
+          source={{ uri: 'https://git.corp.adobe.com/pages/IMS/imslib2.js/demo-react-app/' }}
+          javaScriptEnabled={true}
+          javaScriptEnabledAndroid={true}
+          originWhitelist={['*']}
+          domStorageEnabled={true}
+          mixedContentMode="always"
+          onReceivedSslError={(event) => {
+            console.warn("SSL error ignored for development purposes.");
+            event.proceed();
+          }}
+          onError={(syntheticEvent) => {
+            const { nativeEvent } = syntheticEvent;
+            console.error('WebView error: ', nativeEvent.description || nativeEvent.code);
+          }}
+        
+          onMessage={(event) => {
+            console.log('Session Storage:', event.nativeEvent.data);
+          }}
+          onNavigationStateChange={handleNavigationChange} // Log URL changes
+        />
+      </View>
       <Button title="open custom view with message " onPress={()=>{NativeLocalStorage?.openCustomScreen("naman")}} />
 
-    </SafeAreaView>
+    </ScrollView>
+
   );
 }
 
@@ -70,6 +93,18 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingRight: 5,
     borderRadius: 5,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#f5f5f5', // Optional: Background color
+  },
+  container: {
+    flex: 1,
+    height: 800, // Set a height to ensure scrollability if content overflows
+  },
+  webView: {
+    flex: 1,
+    height: 800, // Ensure WebView is scrollable within the View
   },
 });
 
