@@ -30,25 +30,7 @@ function App(): React.JSX.Element {
     string | null
   >(null);
 
-  React.useEffect(() => {
-    const storedValue = NativeLocalStorage?.getItem('myKey');
-    setValue(storedValue ?? '');
-  }, []);
 
-  function saveValue() {
-    NativeLocalStorage?.setItem(editingValue ?? EMPTY, 'myKey');
-    setValue(editingValue);
-  }
-
-  function clearAll() {
-    NativeLocalStorage?.clear();
-    setValue('');
-  }
-
-  function deleteValue() {
-    NativeLocalStorage?.removeItem(editingValue ?? EMPTY);
-    setValue('');
-  }
 
   return (
      <ScrollView      contentInsetAdjustmentBehavior="automatic"
