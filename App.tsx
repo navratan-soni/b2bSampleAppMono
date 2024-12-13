@@ -65,7 +65,10 @@ function App(): React.JSX.Element {
       <Text>
         {accessToken}
       </Text>
-      <Button title="open custom view with message " onPress={()=>{NativeLocalStorage?.openCustomScreen("naman")}} />
+      {
+        accessToken? <Button title="open custom view with message " onPress={()=>{NativeLocalStorage?.openCustomScreen(accessToken)}} />:null
+
+      }
     
 
     </ScrollView>
