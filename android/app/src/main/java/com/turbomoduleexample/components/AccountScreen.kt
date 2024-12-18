@@ -329,7 +329,7 @@ fun AccountDetailScreen() {
                     modifier = Modifier
                         .size(100.dp)
                         .align(Alignment.CenterStart)
-                        .offset(x = 8.dp, y = -26.dp)
+                        .offset(x = 8.dp, y = -80.dp)
                         .zIndex(1f),
                     contentAlignment = Alignment.Center
                 ) {
@@ -374,7 +374,7 @@ fun GradientHeader() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(180.dp)
+            .height(120.dp)
             .background(
                 brush = Brush.horizontalGradient(
                     colors = listOf(Color(0xFFFF5F6D), Color(0xFF6BA9FF))

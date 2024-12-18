@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gw_ajo_b2b.Models.AccountDetailsRepository
 import com.example.gw_ajo_b2b.Models.BuyingGroupDetailsRepository
-import com.example.gw_ajo_b2b.Models.BuyingGroupRepository
-import com.turbomoduleexample.networking.RetrofitClient
+import com.turbomoduleexample.utils.Utils
 import kotlinx.coroutines.launch
 
 class WatchListViewModel : ViewModel() {
@@ -46,7 +45,9 @@ class WatchListViewModel : ViewModel() {
                     ActivityData(
                         title = "Buying Group fetched",
                         subtitle = buyingGroup?.name?.trimIndent() ?: "Un named",
-                        timestamp = buyingGroup?.updatedAt?: "1 day ago",
+                        timestamp = buyingGroup?.updatedAt?.let {
+                            Utils.convertToIST(it)
+                        } ?: "1 day ago",
                         icon = androidx.compose.material.icons.Icons.Default.Email
                     ),
                     ActivityData(

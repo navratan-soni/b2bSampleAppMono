@@ -114,7 +114,12 @@ fun BottomNavBar(navController: NavHostController) {
 
 @Composable
 fun DashboardScreen() {
-    Text("Dashboard Screen", style = MaterialTheme.typography.displaySmall)
+    Text(
+        modifier = Modifier.fillMaxWidth(),
+        textAlign = TextAlign.Center,
+        text = "Dashboard Screen",
+        style = MaterialTheme.typography.displaySmall
+    )
 }
 
 @Composable
