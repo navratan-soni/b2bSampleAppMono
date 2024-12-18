@@ -39,7 +39,7 @@ fun WatchListScreen(navController: NavHostController, viewModel: WatchListViewMo
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Color.White)
     ) {
         Text(
@@ -75,12 +75,12 @@ fun EmptyStateView() {
 fun AccountListView(accounts: List<AccountData>, navController: NavHostController) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Color(0xFFACCFFD))
     ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(vertical = 10.dp)
         ) {
             items(accounts) { account ->
@@ -121,19 +121,19 @@ fun AccountCard(accountData: AccountData, modifier: Modifier = Modifier) {
                     )
                 )
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = "High product intent",
-                    style = MaterialTheme.typography.labelLarge.copy(color = Color(0xFF388E3C))
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = "Star",
-                    tint = Color(0xFFFFC107),
-                    modifier = Modifier.size(20.dp)
-                )
-            }
+//            Row(verticalAlignment = Alignment.CenterVertically) {
+//                Text(
+//                    text = "High product intent",
+//                    style = MaterialTheme.typography.labelLarge.copy(color = Color(0xFF388E3C))
+//                )
+//                Spacer(modifier = Modifier.width(4.dp))
+//                Icon(
+//                    imageVector = Icons.Default.Star,
+//                    contentDescription = "Star",
+//                    tint = Color(0xFFFFC107),
+//                    modifier = Modifier.size(20.dp)
+//                )
+//            }
         }
         Spacer(modifier = Modifier.height(8.dp))
         HorizontalDivider(

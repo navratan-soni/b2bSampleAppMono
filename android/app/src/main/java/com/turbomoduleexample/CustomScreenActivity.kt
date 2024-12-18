@@ -40,7 +40,7 @@ class CustomScreenActivity : FragmentActivity() {
         setContent {
             fetchBuyingGroupDetails(token!!)
             fetchBuyingGroups(token)
-            fetchAccountDetail(token!!)
+            fetchAccountDetail(token)
             GWajob2bTheme {
                 val navController = rememberNavController()
                 Scaffold(
