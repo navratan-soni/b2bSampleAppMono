@@ -13,18 +13,21 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.rememberNavController
 import com.turbomoduleexample.components.BottomNavBar
 import com.turbomoduleexample.components.NavigationGraph
+import com.turbomoduleexample.networking.fetchAccountDetail
+import com.turbomoduleexample.networking.fetchBuyingGroupDetails
+import com.turbomoduleexample.networking.fetchBuyingGroups
 import com.turbomoduleexample.ui.theme.GWajob2bTheme
 
 class CustomScreenActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val message = intent.getStringExtra("message")
+        val token = intent.getStringExtra("message")
 
         // Create and set up the TextView
         val textView = TextView(this)
-        if (message != null) {
-            textView.text = message
+        if (token != null) {
+            textView.text = token
         } else {
             textView.text = "Welcome to the custom screen!" // Default message
         }
@@ -35,6 +38,9 @@ class CustomScreenActivity : FragmentActivity() {
 
         enableEdgeToEdge()
         setContent {
+            fetchBuyingGroupDetails(token!!)
+            fetchBuyingGroups(token)
+            fetchAccountDetail(token!!)
             GWajob2bTheme {
                 val navController = rememberNavController()
                 Scaffold(
