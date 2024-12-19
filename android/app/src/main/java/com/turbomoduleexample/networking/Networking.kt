@@ -8,6 +8,8 @@ import com.example.gw_ajo_b2b.Models.BuyingGroupResponse
 import com.example.gw_ajo_b2b.Models.BuyingGroupsResponse
 import com.google.gson.Gson
 import com.turbomoduleexample.components.AccountData
+import com.turbomoduleexample.utils.APIState
+import com.turbomoduleexample.utils.APIStateType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -122,6 +124,7 @@ fun fetchBuyingGroups(tokenNew: String) {
                 BuyingGroupRepository.saveBuyingGroups(parsedResponse.data?.buyingGroupsV2?.result)
                 println("Response parsed and saved successfully!")
                 println("Saved Data: ${BuyingGroupRepository.getBuyingGroups()}")
+                APIState.allGroupCall = APIStateType.done
             } catch (e: Exception) {
                 println("Parsing Error: ${e.message}")
             }
@@ -174,6 +177,7 @@ fun fetchAccountDetail(tokenNew: String) {
                 AccountDetailsRepository.saveAccountDetails(result, errors)
                 println("Account details saved successfully!")
                 println("Account Details: ${AccountDetailsRepository.getAccountDetails()}")
+                APIState.accountDetailsCall = APIStateType.done
             } catch (e: Exception) {
                 println("Parsing Error: ${e.message}")
             }
@@ -225,6 +229,7 @@ fun fetchBuyingGroupDetails(tokenNew: String) {
                 BuyingGroupDetailsRepository.saveBuyingGroupDetails(result)
                 println("Buying Group details saved successfully!")
                 println("Buying Group Details: ${BuyingGroupDetailsRepository.getBuyingGroupDetails()}")
+                APIState.groupDetailsCall = APIStateType.done
             } catch (e: Exception) {
                 println("Parsing Error: ${e.message}")
             }

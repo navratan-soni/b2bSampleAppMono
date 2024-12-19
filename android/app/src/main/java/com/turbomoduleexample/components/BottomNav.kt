@@ -113,16 +113,6 @@ fun BottomNavBar(navController: NavHostController) {
 
 
 @Composable
-fun DashboardScreen() {
-    Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        text = "Dashboard Screen",
-        style = MaterialTheme.typography.displaySmall
-    )
-}
-
-@Composable
 fun FeedScreen(navController: NavHostController) {
     Text("Feed Screen", style = MaterialTheme.typography.displaySmall)
 }
